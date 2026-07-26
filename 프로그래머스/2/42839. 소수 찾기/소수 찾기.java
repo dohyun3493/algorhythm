@@ -23,7 +23,7 @@ class Solution {
         if(num == 0 || num == 1) return false;
         if(arr[num]) return false;
         
-        for(int i = 2; i < num; i++){
+        for(int i = 2; i * i <= num; i++){
             if(num % i == 0) {
                 arr[num] = true;
                 return false;
