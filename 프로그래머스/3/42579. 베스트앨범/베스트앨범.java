@@ -26,9 +26,7 @@ class Solution {
     public List<Integer> solution(String[] genres, int[] plays) {
         List<Integer> answer = new ArrayList<>();
         Map<String, Integer> m = new HashMap<>();
-        List<Node> list = new ArrayList<>();
         PriorityQueue<Node> pq = new PriorityQueue<>((o1, o2) -> Integer.compare(o2.cnt, o1.cnt));
-        
         
         for(int i = 0; i < genres.length; i++){
             if(m.containsKey(genres[i])){
@@ -53,7 +51,6 @@ class Solution {
                 }
             }
             
-            
             if(pq2.size() < 2){
                 answer.add(pq2.poll().idx);
             }else{
@@ -61,7 +58,6 @@ class Solution {
                 answer.add(pq2.poll().idx);
             }
         }
-        
         
         return answer;
     }
