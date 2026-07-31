@@ -23,7 +23,6 @@ class Solution {
                     int col = cur.col;
                     int depth = cur.depth;
                     
-                    
                     if(row == targetRow && col == targetCol){
                         if(depth <= 2){
                             return 0;
@@ -34,11 +33,9 @@ class Solution {
                         int nr = row + dir[idx][0];
                         int nc = col + dir[idx][1];
                         
-                        
                         if(nr < 0 || nc < 0 || nr >= 5 || nc >= 5) continue;
                         if(arr[row].charAt(col) == 'X') continue;
                         if(visited[nr][nc]) continue;
-                        
                         
                         q.offer(new Node(nr, nc, depth + 1));
                         visited[nr][nc] = true;
@@ -72,8 +69,6 @@ class Solution {
                 }
                
             }
-            // simulation -> list에 들어있는 얘들 끼리 거리를 구해서 맨해튼이 2이하면 0 / 1
-            
             ans.add(simulation(places[i]));
             list.clear();
         }
