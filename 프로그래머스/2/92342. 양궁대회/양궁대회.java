@@ -7,38 +7,35 @@ class Solution {
     
     void dfs(int target, int cnt, int idx, int[] info){
         if(target == cnt){
-            int[] arr = new int[11];
             int peach = 0;
             int lion = 0;
-            int diff = 0;
+            int[] arr = new int[11];
             
-            for(int i = 0; i < list.size(); i++){
-                arr[list.get(i)]++;
-            }
+            for(int i = 0; i < list.size(); i++) arr[list.get(i)]++;
             
             for(int i = 0; i < 11; i++){
-                if (info[i] == 0 && arr[i] == 0) continue;
-                if (arr[i] > info[i]) {
-                    lion += 10 - i;
-                } else {
-                    peach += 10 - i;
-                }
+                if(arr[i] == 0 && info[i] == 0) continue;
+                if(arr[i] > info[i]) lion += 10 - i;
+                else peach += 10 - i;
             }
-            
-            diff = lion - peach;
-            
-            if(diff > max){
-                max = diff;
                 
-                for(int i = 0; i < 11; i++){
-                    answer[i] = arr[i];
-                }
+            int diff = lion - peach;
+            
+            if(diff > max) {
+                max = diff;
+                for(int i = 0; i < 11; i++) answer[i] = arr[i];
             }
             
-            if (diff == max && diff > 0) {
-                if (isBetter(arr, answer)) {
-                    for (int i = 0; i < 11; i++) {
-                        answer[i] = arr[i];
+            if(diff == max && diff != 0){
+                // 기존의 answer과 현재의 arr를 비교해야 됨.
+                // 가장 낮은 점수를 더 많이 맞힌 경우 return 진행
+                for(int i = 10; i >= 0; i--){
+                    if(answer[i] == 0 && arr[i] == 0) continue;
+                    if(answer[i] == arr[i]) continue;
+                    if(answer[i] > arr[i]) return;
+                    else{
+                        for(int j = 0; j < 11; j++) answer[j] = arr[j];
+                        return;
                     }
                 }
             }
@@ -46,34 +43,18 @@ class Solution {
             return;
         }
         
-        for(int i = idx; i <= 10; i++){
+        for(int i = idx; i < 11; i++){
             list.add(i);
             dfs(target, cnt + 1, i, info);
             list.remove(list.size() - 1);
-        }    
-    }
-    
-    boolean isBetter(int[] newArr, int[] currentAnswer) {
-        for (int i = 10; i >= 0; i--) {
-            if (newArr[i] != currentAnswer[i]) {
-                if (newArr[i] > currentAnswer[i]) {
-                    return true;
-                } else {
-                    return false;
-                }
-            }
         }
-        return false;
     }
     
     public int[] solution(int n, int[] info) {
         answer = new int[11];
         
         dfs(n, 0, 0, info);
-        
-        if (max <= 0) {
-            return new int[]{-1};
-        }
+        if(max <= 0) return new int[] {-1};        
         
         return answer;
     }
