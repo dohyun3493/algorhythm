@@ -39,13 +39,13 @@ class Solution {
         return true;
     }
     
+    // 시뮬레이션
     String find(String p){
         if (p.isEmpty()) return "";
         
         String[] tmp = splitUV(p);
         String u = tmp[0];
         String v = tmp[1];
-        String ans = "";
         
         if(check(u)){
             return u += find(v);
@@ -65,10 +65,6 @@ class Solution {
     }
     
     public String solution(String p) {
-        String answer = "";
-        
-        answer += find(p);
-        
-        return answer;
+        return find(p);
     }
 }
