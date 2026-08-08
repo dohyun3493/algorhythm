@@ -27,8 +27,6 @@ class Solution {
             }
             
             if(diff == max && diff != 0){
-                // 기존의 answer과 현재의 arr를 비교해야 됨.
-                // 가장 낮은 점수를 더 많이 맞힌 경우 return 진행
                 for(int i = 10; i >= 0; i--){
                     if(answer[i] == 0 && arr[i] == 0) continue;
                     if(answer[i] == arr[i]) continue;
